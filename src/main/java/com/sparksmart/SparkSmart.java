@@ -1,6 +1,7 @@
 package com.sparksmart;
 
 import com.ciscospark.Spark;
+import com.ciscospark.Webhook;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -48,6 +49,8 @@ public class SparkSmart {
             message.setText("Hello you idiots. I'm a bot and I'm smarter than every single one of you.");
             spark.messages().post(message);*/
         });
+
+        //registerHook();
         // Create a new room
         /*Room room = new Room();
         room.setTitle("Hello World");
@@ -112,5 +115,15 @@ public class SparkSmart {
         webhook.setName("SparkSmart translation");
 
         spark.webhooks().post(webhook);*/
+    }
+
+    public static void registerHook() throws URISyntaxException {
+        Webhook webhook = new Webhook();
+        webhook.setTargetUrl(new URI("http://964035d5.ngrok.io/conversation"));
+        webhook.setResource("messages");
+        webhook.setEvent("created");
+        webhook.setName("SparkSmart conversation");
+
+        getSpark().webhooks().post(webhook);
     }
 }
