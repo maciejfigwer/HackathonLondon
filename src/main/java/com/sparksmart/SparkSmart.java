@@ -1,18 +1,21 @@
 package com.sparksmart;
 
+import com.ciscospark.Person;
+import com.ciscospark.Room;
 import com.ciscospark.Spark;
 import com.ciscospark.Webhook;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 /**
  * Created by Piotr on 12/3/2016.
  */
 public class SparkSmart {
 
-    private static final String accessToken = "OGNlNzc3OWEtZWZkOC00ZTMwLWIyM2YtYWY2YTc3MDA3YWYwODU4ODc0NWMtOGE0";
+    public static final String accessToken = "OGNlNzc3OWEtZWZkOC00ZTMwLWIyM2YtYWY2YTc3MDA3YWYwODU4ODc0NWMtOGE0";
     public static Spark sparkInstance;
 
     public static Spark getSpark() {
@@ -25,6 +28,13 @@ public class SparkSmart {
         return sparkInstance;
     }
 
+    public static String getCurrentId() {
+        ArrayList<String> id = new ArrayList<>();
+        getSpark().people().queryParam("email", "sparksmart@sparkbot.io").iterate().forEachRemaining(person -> {
+            id.add(person.getId());
+        });
+        return id.get(0);
+    }
 
 
     public static void main(String[] args) throws MalformedURLException, URISyntaxException {
@@ -52,9 +62,10 @@ public class SparkSmart {
 
         //registerHook();
         // Create a new room
-        /*Room room = new Room();
+        Room room = new Room();
         room.setTitle("Hello World");
-        room = spark.rooms().post(room);*/
+        Person person = new Person();
+        room = spark.rooms().post(room);
 
 
         // Add a coworker to the room

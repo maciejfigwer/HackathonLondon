@@ -10,7 +10,12 @@ public class Message {
     private String id;
     private String roomId;
     private String personId;
+    private String toPersonId;
+
+
+
     private String personEmail;
+    private String toPersonEmail;
     private String text;
     private String file;
     private String roomType;
@@ -114,5 +119,20 @@ public class Message {
 
     public void setMentionedPeople(String[] mentionedPeople) {
         this.mentionedPeople = mentionedPeople;
+    }
+    public String getToPersonId() {
+        return toPersonId;
+    }
+
+    public void setToPersonId(String toPersonId) {
+        this.toPersonId = toPersonId;
+    }
+
+    public String getToPersonEmail() {
+        return toPersonEmail;
+    }
+
+    public void setToPersonEmail(String toPersonEmail) {
+        this.toPersonEmail = toPersonEmail;
     }
 }
